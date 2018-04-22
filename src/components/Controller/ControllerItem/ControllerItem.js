@@ -1,10 +1,12 @@
 import React from 'react';
 
+import classes from './ControllerItem.css';
+
 const ControllerItem = (props) => (
-	<div>
-		<div>{props.label}</div>
-		<button>Less</button>
-		<button>More</button>		
+	<div className={classes.ControllerItem}>
+		<div className={classes.Label}>{props.label}</div>
+		<button className={classes.Less}>Less</button>
+		<button className={classes.More}>More</button>		
 	</div>
 );
 
