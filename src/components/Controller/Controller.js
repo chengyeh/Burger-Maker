@@ -24,7 +24,8 @@ const Controller = (props) => (
 					.format(props.total)}</strong></p>
 		<button 
 			className={classes.OrderButton}
-			disabled={!props.purchasable}>Place Order</button>
+			disabled={!props.purchasable}
+			onClick={props.makeOrder}>Place Order</button>
 	</div>
 );
 
