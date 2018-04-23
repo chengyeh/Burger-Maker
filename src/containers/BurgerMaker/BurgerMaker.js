@@ -1,22 +1,43 @@
 import React, { Component } from 'react';
 
 import Burger from '../../components/Burger/Burger';
+import Controller from '../../components/Controller/Controller';
+
+const INGREDIENT_PRICES = {
+	lettuce: 0.5,
+	meat: 1.25,
+	bacon: 1,
+	cheese: 0.75
+};
 
 class BurgerMaker extends Component {
 	state = {
 				ingredients: {
-					salad: 0,
+					lettuce: 0,
 					meat: 0,
 					bacon: 0,
 					cheese: 0,
-				}
+				},
+				totalPrice: 4
 			};
+
+	addIngredientHandler = (type) => {
+		const updatedIngredients = {...this.state.ingredients};
+		updatedIngredients[type]++;
+		const additionalFee = INGREDIENT_PRICES[type];
+
+		this.setState(prevState => ({
+			totalPrice: prevState.totalPrice += additionalFee,
+			ingredients: updatedIngredients
+		}))
+
+	};
 
 	render() {
 		return(
 			<React.Fragment>
 				<Burger ingredients={this.state.ingredients}/>
-				<div>Make controller</div>
+				<Controller onAdded={this.addIngredientHandler} />
 			</React.Fragment>
 		);
 	}
