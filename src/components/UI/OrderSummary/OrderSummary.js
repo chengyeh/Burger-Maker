@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Button from '../Button/Button';
+
 const OrderSummary = (props) => {
 	const listOfAddedIngredients = Object.entries(props.ingredients).filter(ing => {
 		return ing[1] > 0;
@@ -18,7 +20,10 @@ const OrderSummary = (props) => {
 			<ul>
 				{listOfAddedIngredients}
 			</ul>
+			<hr/>
 			<p>Continue to checkout?</p>
+			<Button btnType='Danger' clicked={props.cancelOrder}>Cancel</Button>
+			<Button btnType='Success' clicked={props.continue}>Continue</Button>
 		</React.Fragment>
 	);
 };

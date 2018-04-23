@@ -42,6 +42,10 @@ class BurgerMaker extends Component {
 		this.setState({ordering: false});
 	};
 
+	continueCheckoutHandler = () => {
+		alert('Checkout');
+	};
+
 	addIngredientHandler = (type) => {
 		const updatedIngredients = {...this.state.ingredients};
 		updatedIngredients[type]++;
@@ -72,7 +76,10 @@ class BurgerMaker extends Component {
 		return(
 			<React.Fragment>
 				<Modal show={this.state.ordering} closeModal={this.cancelOrderHandler}>
-					<OrderSummary ingredients={this.state.ingredients} />
+					<OrderSummary 
+						ingredients={this.state.ingredients} 
+						cancelOrder={this.cancelOrderHandler} 
+						continue={this.continueCheckoutHandler} />
 				</Modal>
 				<Burger ingredients={this.state.ingredients}/>
 				<Controller 
