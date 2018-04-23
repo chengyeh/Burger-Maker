@@ -24,7 +24,7 @@ const Ingredient = (props) => {
 		case 'cheese':
 			ingredient = <div className={classes.Cheese}></div>;
 			break;
-		case 'salad':
+		case 'lettuce':
 			ingredient = <div className={classes.Salad}></div>;
 			break;
 		case 'bacon':
@@ -38,7 +38,7 @@ const Ingredient = (props) => {
 };
 
 Ingredient.propTypes = {
-	type: PropTypes.oneOf(['breadTop', 'breadBottom', 'meat', 'cheese', 'salad', 'bacon'])
+	type: PropTypes.oneOf(['breadTop', 'breadBottom', 'meat', 'cheese', 'lettuce', 'bacon'])
 };
 
 export default Ingredient;
