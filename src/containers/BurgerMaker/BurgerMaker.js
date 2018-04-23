@@ -18,7 +18,7 @@ class BurgerMaker extends Component {
 					bacon: 0,
 					cheese: 0,
 				},
-				totalPrice: 4
+				totalPrice: 3
 			};
 
 	addIngredientHandler = (type) => {
@@ -55,7 +55,8 @@ class BurgerMaker extends Component {
 				<Controller 
 					onAdded={this.addIngredientHandler} 
 					onRemoved={this.removeIngredientHandler} 
-					currentIngredients={this.state.ingredients} />
+					currentIngredients={this.state.ingredients} 
+					total={this.state.totalPrice} />
 			</React.Fragment>
 		);
 	}

@@ -20,6 +20,8 @@ const Controller = (props) => (
 					onRemoved={() => props.onRemoved(item.type)} 
 					disabled={!props.currentIngredients[item.type]}/>;
 		})}
+		<p>Total Price: <strong>{new Intl.NumberFormat(undefined, {style: 'currency', currency: 'USD' })
+					.format(props.total)}</strong></p>
 	</div>
 );
 
