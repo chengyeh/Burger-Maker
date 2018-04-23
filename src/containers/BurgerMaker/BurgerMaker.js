@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Burger from '../../components/Burger/Burger';
 import Controller from '../../components/Controller/Controller';
+import Modal from '../../components/UI/Modal/Modal';
 
 const INGREDIENT_PRICES = {
 	lettuce: 0.5,
@@ -60,6 +61,8 @@ class BurgerMaker extends Component {
 	render() {
 		return(
 			<React.Fragment>
+				<Modal>
+				</Modal>
 				<Burger ingredients={this.state.ingredients}/>
 				<Controller 
 					onAdded={this.addIngredientHandler} 
