@@ -7,7 +7,8 @@ const ControllerItem = (props) => (
 		<div className={classes.Label}>{props.label}</div>
 		<button 
 			className={classes.Less}
-			onClick={props.onRemoved}>-</button>
+			onClick={props.onRemoved}
+			disabled={props.disabled}>-</button>
 		<button 
 			className={classes.More}
 			onClick={props.onAdded}>+</button>		

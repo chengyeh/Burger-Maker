@@ -17,7 +17,8 @@ const Controller = (props) => (
 					key={item.label} 
 					label={item.label} 
 					onAdded={() => props.onAdded(item.type)} 
-					onRemoved={() => props.onRemoved(item.type)} />;
+					onRemoved={() => props.onRemoved(item.type)} 
+					disabled={!props.currentIngredients[item.type]}/>;
 		})}
 	</div>
 );

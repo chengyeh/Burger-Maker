@@ -54,7 +54,8 @@ class BurgerMaker extends Component {
 				<Burger ingredients={this.state.ingredients}/>
 				<Controller 
 					onAdded={this.addIngredientHandler} 
-					onRemoved={this.removeIngredientHandler} />
+					onRemoved={this.removeIngredientHandler} 
+					currentIngredients={this.state.ingredients} />
 			</React.Fragment>
 		);
 	}
