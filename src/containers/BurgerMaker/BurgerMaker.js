@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Burger from '../../components/Burger/Burger';
 import Controller from '../../components/Controller/Controller';
 import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/UI/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
 	lettuce: 0.5,
@@ -62,6 +63,7 @@ class BurgerMaker extends Component {
 		return(
 			<React.Fragment>
 				<Modal>
+					<OrderSummary ingredients={this.state.ingredients} />
 				</Modal>
 				<Burger ingredients={this.state.ingredients}/>
 				<Controller 
