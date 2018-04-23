@@ -5,6 +5,7 @@ import Controller from '../../components/Controller/Controller';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/UI/OrderSummary/OrderSummary';
 
+const BASE_PRICE = 3;
 const INGREDIENT_PRICES = {
 	lettuce: 0.5,
 	meat: 1.25,
@@ -20,7 +21,7 @@ class BurgerMaker extends Component {
 					bacon: 0,
 					cheese: 0,
 				},
-				totalPrice: 3,
+				totalPrice: BASE_PRICE,
 				purchasable: false,
 				ordering: false
 			};
@@ -77,7 +78,10 @@ class BurgerMaker extends Component {
 			<React.Fragment>
 				<Modal show={this.state.ordering} closeModal={this.cancelOrderHandler}>
 					<OrderSummary 
-						ingredients={this.state.ingredients} 
+						ingredients={this.state.ingredients}
+						basePrice={BASE_PRICE}
+						ingsPrice={INGREDIENT_PRICES} 
+						total={this.state.totalPrice}
 						cancelOrder={this.cancelOrderHandler} 
 						continue={this.continueCheckoutHandler} />
 				</Modal>
