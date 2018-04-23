@@ -18,8 +18,18 @@ class BurgerMaker extends Component {
 					bacon: 0,
 					cheese: 0,
 				},
-				totalPrice: 3
+				totalPrice: 3,
+				purchasable: false
 			};
+
+	updatePurchaseState = () => {
+		for(let ing in this.state.ingredients) {
+			if(this.state.ingredients[ing] > 0) {
+				return this.setState({purchasable: true});
+			}
+		}
+		this.setState({purchasable: false});
+	};
 
 	addIngredientHandler = (type) => {
 		const updatedIngredients = {...this.state.ingredients};
@@ -29,8 +39,7 @@ class BurgerMaker extends Component {
 		this.setState(prevState => ({
 			totalPrice: prevState.totalPrice += additionalFee,
 			ingredients: updatedIngredients
-		}))
-
+		}), () => this.updatePurchaseState())
 	};
 
 	removeIngredientHandler = (type) => {
@@ -45,7 +54,7 @@ class BurgerMaker extends Component {
 		this.setState(prevState => ({
 			totalPrice: prevState.totalPrice -= subtractingFee,
 			ingredients: updatedIngredients
-		}))
+		}), () => this.updatePurchaseState())
 	};
 
 	render() {
@@ -56,7 +65,8 @@ class BurgerMaker extends Component {
 					onAdded={this.addIngredientHandler} 
 					onRemoved={this.removeIngredientHandler} 
 					currentIngredients={this.state.ingredients} 
-					total={this.state.totalPrice} />
+					total={this.state.totalPrice} 
+					purchasable={this.state.purchasable} />
 			</React.Fragment>
 		);
 	}
