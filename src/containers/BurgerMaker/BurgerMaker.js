@@ -33,11 +33,28 @@ class BurgerMaker extends Component {
 
 	};
 
+	removeIngredientHandler = (type) => {
+		if(!this.state.ingredients[type]) {
+			return;
+		}
+
+		const updatedIngredients = {...this.state.ingredients};
+		updatedIngredients[type]--;
+		const subtractingFee = INGREDIENT_PRICES[type];
+
+		this.setState(prevState => ({
+			totalPrice: prevState.totalPrice -= subtractingFee,
+			ingredients: updatedIngredients
+		}))
+	};
+
 	render() {
 		return(
 			<React.Fragment>
 				<Burger ingredients={this.state.ingredients}/>
-				<Controller onAdded={this.addIngredientHandler} />
+				<Controller 
+					onAdded={this.addIngredientHandler} 
+					onRemoved={this.removeIngredientHandler} />
 			</React.Fragment>
 		);
 	}

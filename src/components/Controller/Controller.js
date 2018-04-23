@@ -16,7 +16,8 @@ const Controller = (props) => (
 			return <ControllerItem 
 					key={item.label} 
 					label={item.label} 
-					onAdded={() => props.onAdded(item.type)} />;
+					onAdded={() => props.onAdded(item.type)} 
+					onRemoved={() => props.onRemoved(item.type)} />;
 		})}
 	</div>
 );
