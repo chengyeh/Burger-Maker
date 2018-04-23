@@ -22,6 +22,7 @@ const Controller = (props) => (
 		})}
 		<p>Total Price: <strong>{new Intl.NumberFormat(undefined, {style: 'currency', currency: 'USD' })
 					.format(props.total)}</strong></p>
+		<button className={classes.OrderButton}>Place Order</button>
 	</div>
 );
 
