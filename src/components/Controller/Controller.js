@@ -2,6 +2,7 @@ import React from 'react';
 
 import ControllerItem from './ControllerItem/ControllerItem';
 import classes from './Controller.css';
+import CurrencyFormat from '../CurrencyFormat/CurrencyFormat';
 
 const items = [
 	{label: 'Lettuce', type: 'lettuce'},
@@ -20,8 +21,7 @@ const Controller = (props) => (
 					onRemoved={() => props.onRemoved(item.type)} 
 					disabled={!props.currentIngredients[item.type]}/>;
 		})}
-		<p>Total Price: <strong>{new Intl.NumberFormat(undefined, {style: 'currency', currency: 'USD' })
-					.format(props.total)}</strong></p>
+		<p>Total Price: <CurrencyFormat amount={props.total} /></p>
 		<button 
 			className={classes.OrderButton}
 			disabled={!props.purchasable}
