@@ -1,17 +1,14 @@
 .NavBarItem {
-	height: 100%;
-	margin: 0;
-	display: flex;
-	align-items: center;
+	width: 100%;
+	margin: 10px 0;
+	display: block;
 	box-sizing: border-box;
 }
 
 .NavBarItem a {
-	height: 100%;
-	padding: 16px 10px;
-	color: white;
+	width: 100%;
+	color: #8F5C2C;
 	text-decoration: none;
-	border-bottom: 4px solid transparent;
 	box-sizing: border-box;
 	display: block;
 }
@@ -19,7 +16,30 @@
 .NavBarItem a:hover,
 .NavBarItem a:active,
 .NavBarItem a.Active {
-	background-color: #8F5C2C;
-	border-bottom: 4px solid #40A4C8;
-	color: white;
+	color: #40A4C8;
+}
+
+@media (min-width: 500px) {
+	.NavBarItem {
+		width: auto;
+		height: 100%;
+		margin: 0;
+		display: flex;
+		align-items: center;
+	}
+
+	.NavBarItem a {
+		height: 100%;
+		padding: 16px 10px;
+		color: white;
+		border-bottom: 4px solid transparent;
+	}
+
+	.NavBarItem a:hover,
+	.NavBarItem a:active,
+	.NavBarItem a.Active {
+		background-color: #8F5C2C;
+		border-bottom: 4px solid #40A4C8;
+		color: white;
+	}
 }

@@ -7,10 +7,10 @@ import NavBar from '../NavBar/NavBar';
 const Toolbar = (props) => (
 	<header className={classes.Toolbar}>
 		<div>MENU</div>
-		<div className={classes.Logo}>
+		<div className={`${classes.Logo} ${classes.DesktopMode}`}>
 			<Logo />
 		</div>
-		<nav>
+		<nav className={classes.DesktopMode}>
 			<NavBar />
 		</nav>
 	</header>
