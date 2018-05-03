@@ -4,6 +4,7 @@ import Burger from '../../components/Burger/Burger';
 import Controller from '../../components/Controller/Controller';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/UI/OrderSummary/OrderSummary';
+import axios from '../../axios-instances/order';
 
 const BASE_PRICE = 3;
 const INGREDIENT_PRICES = {
@@ -44,7 +45,24 @@ class BurgerMaker extends Component {
 	};
 
 	continueCheckoutHandler = () => {
-		alert('Checkout');
+		const order = {
+			ingredients: this.state.ingredients,
+			total: this.state.totalPrice,
+			customer: {
+				name: 'Brian Lee',
+				email: 'test@test.com',
+				address: {
+					stree: 'Teststreet',
+					city: 'Testcity',
+					zidCode: '66666'
+				},
+				phone: '9199887777'
+			}
+		};
+
+		axios.post('/orders.json', order)
+			.then(response => console.log(response))
+			.catch(err => console.log(err));
 	};
 
 	addIngredientHandler = (type) => {
