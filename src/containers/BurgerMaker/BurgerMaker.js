@@ -5,6 +5,7 @@ import Controller from '../../components/Controller/Controller';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/UI/OrderSummary/OrderSummary';
 import axios from '../../axios-instances/order';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 const BASE_PRICE = 3;
 const INGREDIENT_PRICES = {
@@ -24,7 +25,8 @@ class BurgerMaker extends Component {
 				},
 				totalPrice: BASE_PRICE,
 				purchasable: false,
-				ordering: false
+				ordering: false,
+				sendingOrder: false
 			};
 
 	updatePurchaseState = () => {
@@ -45,6 +47,8 @@ class BurgerMaker extends Component {
 	};
 
 	continueCheckoutHandler = () => {
+		this.setState({sendingOrder: true});
+
 		const order = {
 			ingredients: this.state.ingredients,
 			total: this.state.totalPrice,
@@ -61,8 +65,12 @@ class BurgerMaker extends Component {
 		};
 
 		axios.post('/orders.json', order)
-			.then(response => console.log(response))
-			.catch(err => console.log(err));
+			.then(response => {
+				this.setState({sendingOrder: false, ordering: false});
+			})
+			.catch(err => {
+				this.setState({sendingOrder: false});
+			});
 	};
 
 	addIngredientHandler = (type) => {
@@ -95,6 +103,7 @@ class BurgerMaker extends Component {
 		return(
 			<React.Fragment>
 				<Modal show={this.state.ordering} closeModal={this.cancelOrderHandler}>
+					{this.state.sendingOrder ? <Spinner /> : null}
 					<OrderSummary 
 						ingredients={this.state.ingredients}
 						basePrice={BASE_PRICE}
