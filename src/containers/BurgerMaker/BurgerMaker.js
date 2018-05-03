@@ -5,7 +5,6 @@ import Controller from '../../components/Controller/Controller';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/UI/OrderSummary/OrderSummary';
 import axios from '../../axios-instances/order';
-import Spinner from '../../components/UI/Spinner/Spinner';
 
 const BASE_PRICE = 3;
 const INGREDIENT_PRICES = {
@@ -102,8 +101,9 @@ class BurgerMaker extends Component {
 	render() {
 		return(
 			<React.Fragment>
-				<Modal show={this.state.ordering} closeModal={this.cancelOrderHandler}>
-					{this.state.sendingOrder ? <Spinner /> : null}
+				<Modal show={this.state.ordering} 
+					   sending={this.state.sendingOrder} 
+					   closeModal={this.cancelOrderHandler}>
 					<OrderSummary 
 						ingredients={this.state.ingredients}
 						basePrice={BASE_PRICE}
