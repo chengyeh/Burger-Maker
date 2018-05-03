@@ -6,6 +6,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/UI/OrderSummary/OrderSummary';
 import axios from '../../axios-instances/order';
 import errorHandler from '../../hoc/errorHandler/errorHandler';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 const BASE_PRICE = 3;
 const INGREDIENT_PRICES = {
@@ -17,17 +18,20 @@ const INGREDIENT_PRICES = {
 
 class BurgerMaker extends Component {
 	state = {
-				ingredients: {
-					lettuce: 0,
-					meat: 0,
-					bacon: 0,
-					cheese: 0,
-				},
+				ingredients: null,
 				totalPrice: BASE_PRICE,
 				purchasable: false,
 				ordering: false,
 				sendingOrder: false
 			};
+
+	componentDidMount() {
+		axios.get('https://react-burger-shop-lcy.firebaseio.com/ingredients')
+			.then(res => {
+				this.setState({ingredients: res.data});
+			})
+			.catch(err => {})
+	}
 
 	updatePurchaseState = () => {
 		for(let ing in this.state.ingredients) {
@@ -100,27 +104,41 @@ class BurgerMaker extends Component {
 	};
 
 	render() {
+		let orderSummary = null;
+		let main = <Spinner />;
+		if(this.state.ingredients) {
+			orderSummary = (
+				<OrderSummary 
+				ingredients={this.state.ingredients}
+				basePrice={BASE_PRICE}
+				ingsPrice={INGREDIENT_PRICES} 
+				total={this.state.totalPrice}
+				cancelOrder={this.cancelOrderHandler} 
+				continue={this.continueCheckoutHandler} />
+			);
+
+			main = (
+				<React.Fragment>
+					<Burger ingredients={this.state.ingredients}/>
+					<Controller 
+						onAdded={this.addIngredientHandler} 
+						onRemoved={this.removeIngredientHandler} 
+						currentIngredients={this.state.ingredients} 
+						total={this.state.totalPrice} 
+						purchasable={this.state.purchasable} 
+						makeOrder={this.makeOrderHandler} />
+				</React.Fragment>
+			);
+		}
+
 		return(
 			<React.Fragment>
 				<Modal show={this.state.ordering} 
 					   sending={this.state.sendingOrder} 
 					   closeModal={this.cancelOrderHandler}>
-					<OrderSummary 
-						ingredients={this.state.ingredients}
-						basePrice={BASE_PRICE}
-						ingsPrice={INGREDIENT_PRICES} 
-						total={this.state.totalPrice}
-						cancelOrder={this.cancelOrderHandler} 
-						continue={this.continueCheckoutHandler} />
+					{orderSummary}
 				</Modal>
-				<Burger ingredients={this.state.ingredients}/>
-				<Controller 
-					onAdded={this.addIngredientHandler} 
-					onRemoved={this.removeIngredientHandler} 
-					currentIngredients={this.state.ingredients} 
-					total={this.state.totalPrice} 
-					purchasable={this.state.purchasable} 
-					makeOrder={this.makeOrderHandler} />
+				{main}
 			</React.Fragment>
 		);
 	}
