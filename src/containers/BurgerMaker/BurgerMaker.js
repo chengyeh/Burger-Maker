@@ -5,6 +5,7 @@ import Controller from '../../components/Controller/Controller';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/UI/OrderSummary/OrderSummary';
 import axios from '../../axios-instances/order';
+import errorHandler from '../../hoc/errorHandler/errorHandler';
 
 const BASE_PRICE = 3;
 const INGREDIENT_PRICES = {
@@ -125,4 +126,4 @@ class BurgerMaker extends Component {
 	}
 }
 
-export default BurgerMaker;
+export default errorHandler(BurgerMaker, axios);
