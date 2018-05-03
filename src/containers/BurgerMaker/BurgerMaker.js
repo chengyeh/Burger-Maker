@@ -22,15 +22,18 @@ class BurgerMaker extends Component {
 				totalPrice: BASE_PRICE,
 				purchasable: false,
 				ordering: false,
-				sendingOrder: false
+				sendingOrder: false,
+				error: false
 			};
 
 	componentDidMount() {
-		axios.get('https://react-burger-shop-lcy.firebaseio.com/ingredients')
+		axios.get('https://react-burger-shop-lcy.firebaseio.com/ingredients.json')
 			.then(res => {
 				this.setState({ingredients: res.data});
 			})
-			.catch(err => {})
+			.catch(err => {
+				this.setState({error: true});
+			})
 	}
 
 	updatePurchaseState = () => {
@@ -105,7 +108,7 @@ class BurgerMaker extends Component {
 
 	render() {
 		let orderSummary = null;
-		let main = <Spinner />;
+		let main = this.state.error ? <p style={{textAlign: 'center'}}>Please refresh the page</p> : <Spinner />;
 		if(this.state.ingredients) {
 			orderSummary = (
 				<OrderSummary 
