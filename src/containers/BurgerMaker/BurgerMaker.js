@@ -29,7 +29,9 @@ class BurgerMaker extends Component {
 	componentDidMount() {
 		axios.get('https://react-burger-shop-lcy.firebaseio.com/ingredients.json')
 			.then(res => {
-				this.setState({ingredients: res.data});
+				const {lettuce, meat, bacon, cheese} = res.data;
+				const ingredients = {lettuce, meat, bacon, cheese};
+				this.setState({ingredients});
 			})
 			.catch(err => {
 				this.setState({error: true});
@@ -78,7 +80,17 @@ class BurgerMaker extends Component {
 		// 	.catch(err => {
 		// 		this.setState({sendingOrder: false});
 		// 	});
-		this.props.history.push('/checkout');
+
+		const queryParams = [];
+		for(let key in this.state.ingredients) {
+			queryParams.push(encodeURIComponent(key) + '=' + encodeURIComponent(this.state.ingredients[key]));
+		}
+		const queryString = queryParams.join('&');
+
+		this.props.history.push({
+			pathname: '/checkout',
+			search: `?${queryString}`
+		});
 	};
 
 	addIngredientHandler = (type) => {
