@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import Layout from '../Layout/Layout';
-import BurgerMaker from '../BurgerMaker/BurgerMaker';
+import Layout from './containers/Layout/Layout';
+import BurgerMaker from './containers/BurgerMaker/BurgerMaker';
 
 class App extends Component {
   render() {
