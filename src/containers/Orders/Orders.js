@@ -6,7 +6,7 @@ import errorHandler from '../../hoc/errorHandler/errorHandler';
 
 class Orders extends Component {
 	state = {
-		orders: null,
+		orders: [],
 		loading: true
 	};
 
@@ -31,8 +31,12 @@ class Orders extends Component {
 		console.log(this.state)
 		return(
 			<div>
-				<Order />
-				<Order />
+				{this.state.orders.map(order => (
+					<Order 
+						key={order.id} 
+						ingredients={order.ingredients}
+						total={order.total} />
+				))}
 			</div>
 		);
 	}
