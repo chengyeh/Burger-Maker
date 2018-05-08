@@ -62,7 +62,7 @@ class CustomerInfo extends Component{
 				eleType: 'select',
 				eleConfig: {
 					options: [
-						{value: '', displayValue: 'Choose a delivery method'},
+						{value: '', displayValue: 'Choose a method'},
 						{value: 'carryout', displayValue: 'Carryout'},
 						{value: 'delivery', displayValue: 'Delivery'}
 					]
@@ -90,7 +90,15 @@ class CustomerInfo extends Component{
 			.catch(err => {
 				this.setState({sendingOrder: false});
 			});
-	}
+	};
+
+	inputChangedHandler = (event, elementId) => {
+		const updatedForm = {...this.state.formConfig};
+		const updatedEle = {...updatedForm[elementId]};
+		updatedEle.value = event.target.value;
+		updatedForm[elementId] = updatedEle;
+		this.setState({formConfig: updatedForm});
+	};
 
 	render() {
 		const formEleArray = Object.entries(this.state.formConfig).map(ele => {
@@ -107,7 +115,8 @@ class CustomerInfo extends Component{
 						key={ele.id}
 						eleType={ele.config.eleType} 
 						eleConfig={ele.config.eleConfig} 
-						value={ele.config.value} />
+						value={ele.config.value} 
+						changed={(e) => this.inputChangedHandler(e, ele.id)} />
 				))}
 				<Button 
 					btnType='Success'
