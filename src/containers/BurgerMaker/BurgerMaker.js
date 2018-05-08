@@ -56,31 +56,6 @@ class BurgerMaker extends Component {
 	};
 
 	continueCheckoutHandler = () => {
-		// this.setState({sendingOrder: true});
-
-		// const order = {
-		// 	ingredients: this.state.ingredients,
-		// 	total: this.state.totalPrice,
-		// 	customer: {
-		// 		name: 'Brian Lee',
-		// 		email: 'test@test.com',
-		// 		address: {
-		// 			stree: 'Teststreet',
-		// 			city: 'Testcity',
-		// 			zidCode: '66666'
-		// 		},
-		// 		phone: '9199887777'
-		// 	}
-		// };
-
-		// axios.post('/orders.json', order)
-		// 	.then(response => {
-		// 		this.setState({sendingOrder: false, ordering: false});
-		// 	})
-		// 	.catch(err => {
-		// 		this.setState({sendingOrder: false});
-		// 	});
-
 		const queryParams = [];
 		for(let key in this.state.ingredients) {
 			queryParams.push(encodeURIComponent(key) + '=' + encodeURIComponent(this.state.ingredients[key]));
