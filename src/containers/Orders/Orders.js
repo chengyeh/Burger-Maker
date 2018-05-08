@@ -28,7 +28,6 @@ class Orders extends Component {
 	}
 
 	render() {
-		console.log(this.state)
 		return(
 			<div>
 				{this.state.orders.map(order => (
