@@ -85,6 +85,8 @@ class BurgerMaker extends Component {
 		for(let key in this.state.ingredients) {
 			queryParams.push(encodeURIComponent(key) + '=' + encodeURIComponent(this.state.ingredients[key]));
 		}
+
+		queryParams.push(`total=${this.state.totalPrice}`);
 		const queryString = queryParams.join('&');
 
 		this.props.history.push({
