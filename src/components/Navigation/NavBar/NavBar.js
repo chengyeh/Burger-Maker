@@ -5,8 +5,8 @@ import classes from './NavBar.css';
 
 const NavBar = () => (
 	<ul className={classes.NavBar}>
-		<NavBarItem link="/" active>Burger Maker</NavBarItem>
-		<NavBarItem link="/">Checkout</NavBarItem>
+		<NavBarItem link="/">Burger Maker</NavBarItem>
+		<NavBarItem link="/orders">Orders</NavBarItem>
 	</ul>
 );
 
